@@ -1,0 +1,246 @@
+@charset "utf-8";
+
+/*初期設定*/
+html{
+  font-size: 64.5%; 
+}
+*, *::before, *::after{
+  box-sizing: border-box;
+}
+body{
+  font-size: 1.4rem;
+  font-family: "Hiragino kaku Gothic ProN", Meiryo, sans-serif;
+  background-image: url('../images/background.jpg');
+  background-color: rgba(255, 255, 255, 0.5);
+  background-blend-mode: lighten;
+  background-size: cover;
+  position: relative;
+  min-height: 100vh;
+}
+.container{
+  position: relative;
+  width: 75%;
+  text-align: left;
+  padding-bottom: 7rem;
+}
+p{
+  background-color: rgba(255, 240, 245, 0.7);
+}
+
+@media screen and (max-width: 787px){
+  html{
+    font-size: 32.25%;
+  }
+  .container{
+    width: 90%;
+  }
+}
+
+/* navbar
+nav{
+  position:sticky;
+} */
+
+/* top */
+#title-img{
+  width: 70%;
+  margin: 0 15%;
+  margin-top: 3.0rem;
+}
+.top-comment{
+  display: block;
+  font-size: 2.0rem;
+  margin-top: 3.0rem;
+  background-color: rgba(255, 240, 245, 0.7);
+}
+.input-group{
+  font-size: 2.5rem;
+  /* justify-content: center; */
+  align-items: stretch;
+  margin-bottom: 5.0rem;
+  width: 100%;
+}
+input.input_keyword{
+  width:75%;
+  font-size: 2.5rem;
+}
+.howtoSlide{
+  position: relative;
+  width: 80%;
+  height: calc(75vw * 0.8 * (389/680));
+  left:10%;
+  /* transform: translate(50%, 0); */
+}
+
+@media screen and (max-width: 787px){
+  #title-img{
+    width: 100%;
+    margin: 0;
+    margin-top: 3.0rem;
+  }
+  .howtoSlide{
+    /* width: calc(640px / 2);
+    height: calc(389px / 2); */
+    width: 100%;
+    height:calc(90vw*(389/640));
+    left:0;
+    transform: translate(0, 0);
+  }
+}
+
+
+/* search */
+.search{
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+#resultsum{
+  display: block;
+  padding: 1.0rem, 0;
+}
+
+#resultsum > p{
+  display: block;
+  font-size: 3.5rem;
+  margin: 0;
+}
+
+#map{
+  height: 60rem;
+  z-index: 0;
+}
+
+/* 吹き出しの設定 */
+.popup{
+  justify-content: center;
+  text-align: center;
+}
+
+.pop-title{
+  display: block;
+  /* height: 3.0rem; */
+  font-size: 2.5rem;
+  padding: 0.7rem 0.7rem;
+  border-top: 0.4rem double black;
+  border-bottom: 0.4rem double black;
+  text-align: center;
+  justify-content: center;
+}
+
+.mini-img{
+  width: 20rem;
+  margin: 0.5rem;
+}
+
+/* 詳細情報の設定 */
+#info{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  width: 35%;
+  padding: 0 3%;
+  top: 12.5rem;
+  right: 0;
+  background-color: aliceblue;
+}
+i{
+  font-size: 2.5rem;
+}
+.item-title{
+  display: block;
+  margin: 0;
+  padding: 1.0rem 1.0rem;
+  font-size: 3.5rem;
+  text-align: center;
+  border-top: 0.4rem double black;
+  border-bottom: 0.4rem double black;
+  background-color: #fff;
+}
+.info-img{
+  margin: 1.0rem 7.5%;
+  width:85%;
+  object-fit: cover;
+}
+.comment{
+  font-size: 1.6rem;
+  margin: 0;
+  background-color: azure;
+}
+.content-title{
+  display: block;
+  width: 100%;
+  margin: auto;
+  background-color: black;
+  color: aliceblue;
+  font-size: 2.8rem;
+  text-align: center;
+  margin: 0;
+}
+.shop-name{
+  display: block;
+  width: 100%;
+  font-size: 3.5rem;
+  text-align: center;
+  background-color: azure;
+}
+div.none *{
+  display: none;
+}
+/* スマホ用info */
+@media screen and (max-width:787px){
+  #info{
+    position: relative;
+    top:0;
+    width: 100%;
+    /* height: calc(100vh - 60rem - 2.0rem - 2.5rem - 3.5rem - 4.8rem); */
+  }
+  .info-img{
+    width: 80%;
+    height: calc(100% - (2.5rem + 2.0rem + 3.5rem + 2.8rem + 2.8rem + 1.6*3rem + 3.5rem + 1.0rem + 1.0rem));
+    object-fit: cover;
+  }
+}
+
+
+/* insert */
+.title{
+  display: block;
+  font-size: 3.5rem;
+  text-align: center;
+  padding: 1.0rem 0;
+  border-top: 1.5rem double #fff;
+  border-bottom: 1.5rem double #fff;
+  margin-top: 2.0rem;
+}
+.btn{
+  font-size: 3.5rem;
+}
+.message{
+  display: block;
+  font-size: 2.5rem;
+  padding: 1.0rem 0;
+  margin-top: 3.0rem;
+  background-color: rgba(255, 240, 245, 0.7);
+}
+.success{
+  border-left: 1.5rem solid blue;
+}
+.error{
+  border-left: 1.5rem solid red;
+}
+
+
+/* footer */
+footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: #fff;
+  background-color: black;
+  text-align: center;
+  font-size: 1.8rem;
+  padding: 2.0rem;
+}
