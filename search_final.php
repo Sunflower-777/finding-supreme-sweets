@@ -14,6 +14,8 @@
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
+   <!-- plugin -->
+   <script src="leaflet.sprite-gh-pages/dist/leaflet.sprite.js"></script>
   <title>Search sweets</title>
 </head>
 <body>
@@ -92,14 +94,18 @@
         echo "var m" . $line[0] . "= L.marker([$line[4], $line[5]]).addTo(map);\n";
         echo "shopLocation.push([$line[4], $line[5]]);";
         echo "m" . $line[0]	. ".bindPopup(\"<div class=\\\"popup\\\"><h1 class=\\\"pop-title\\\">" . $line[1] . "</h1><br /><img class=\\\"mini-img\\\" src=\\\"". $line[2] ."\\\"></div>\").openPopup();\n";
-        echo "c += 1 ;";
-        echo "var info" . $line[0] . "= \"<i id=\\\"back\\\" class=\\\"bi bi-caret-left-fill\\\"></i><i id=\\\"next\\\" class=\\\"bi bi-caret-right-fill\\\"></i><h1 class=\\\"item-title\\\">" . $line[1] . "</h1><img class=\\\"info-img\\\" src=\\\"". $line[2] ."\\\"><h2 class=\\\"content-title\\\">comment</h2><p class=\\\"comment\\\">".$line[3]."</p><h2 class=\\\"content-title\\\">shop</h2><p class=\\\"shop-name\\\">".$line[6]."</p><a class=\\\"web\\\" href=\\\"".$line[7]."\\\">詳しくはwebで→</a>\";";
-        echo "var i = info" . $line[0] . ";";
-        echo "datas.push(i);";
-        echo "var Information = document.getElementById(\"info\");";
-        echo "Information.innerHTML = info" . $line[0] . ";";
+        echo "c += 1 ;\n";
+        echo "var info" . $line[0] . "= \"<i id=\\\"back\\\" class=\\\"bi bi-caret-left-fill\\\"></i><i id=\\\"next\\\" class=\\\"bi bi-caret-right-fill\\\"></i><h1 class=\\\"item-title\\\">" . $line[1] . "</h1><img class=\\\"info-img\\\" src=\\\"". $line[2] ."\\\"><h2 class=\\\"content-title\\\">comment</h2><p class=\\\"comment\\\">".$line[3]."</p><h2 class=\\\"content-title\\\">shop</h2><p class=\\\"shop-name\\\">".$line[6]."</p><a class=\\\"web\\\" href=\\\"".$line[7]."\\\">詳しくはwebで→</a>\";\n";
+        echo "var i = info" . $line[0] . ";\n";
+        echo "datas.push(i);\n";
+        echo "var Information = document.getElementById(\"info\");\n";
+        echo "Information.innerHTML = info" . $line[0] . ";\n";
       }
 
+      require_once('./searchStation.php');
+      foreach($latlons as $latlon){
+        echo "var station = L.marker([$latlon[0], $latlon[1]], {icon: L.spriteIcon('red')}).addTo(map);";
+      }
     ?>
 
     var cursor = c - 1;
