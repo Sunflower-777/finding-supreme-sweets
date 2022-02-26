@@ -54,9 +54,10 @@
 
    //取り出した駅の情報を使いやすいように分割したい
   $latlons = array();
-  $lons = array();
+  $stationNames = array();
   foreach($stations as $station){
     $latlons[] = array($station->y, $station->x);
+    $stationNames[] = $station->name;
   }
 
 

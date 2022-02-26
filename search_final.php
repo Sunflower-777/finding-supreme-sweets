@@ -79,7 +79,7 @@
     });
 
     var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a><br /><a href="http://express.heartrails.com/">HeartRails Express</a>',
         });
     tileLayer.addTo(map);
     <?php
@@ -103,8 +103,10 @@
       }
 
       require_once('./searchStation.php');
-      foreach($latlons as $latlon){
-        echo "var station = L.marker([$latlon[0], $latlon[1]], {icon: L.spriteIcon('red')}).addTo(map);";
+      for($i=0; $i < count($latlons); $i++){
+        echo "var station = L.marker([".$latlons[$i][0].", ".$latlons[$i][1]."], {icon: L.spriteIcon('red')}).addTo(map);\n";
+        // echo "var station = L.marker([".$latlons[$i][0].", ".$latlons[$i][1]."]).addTo(map);\n";
+        echo "station.bindPopup('<h3>$stationNames[$i]</h3>')\n";
       }
     ?>
 
