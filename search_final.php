@@ -56,17 +56,6 @@
         $connect = "host=" . $host . " dbname=" . $dbname . " user=" . $user . " password=" . $password;
         $dbconn = pg_connect($connect) or die('Could not connect: '.pg_last_error());
 
-        // 地図の中心座標を決める
-        // $query = "SELECT lat, lon FROM sweets WHERE (name LIKE $1 OR category LIKE $2);";
-        // $query = "SELECT lat, lon FROM sweets WHERE (position($1 in name)>0 OR position($2 in category)>0);";
-        // // 検索
-        // $result = pg_query_params($dbconn, $query, array($item_name, $item_name)) or die('Could not connect: ' . pg_last_error());
-        // $line = pg_fetch_array($result, null, PGSQL_NUM);
-        // // 地図の中心座標を変数に入れる
-        // while ($line = pg_fetch_array($result, null, PGSQL_NUM)){
-        //   $avglat = $line[0];
-        //   $avglon = $line[1];
-        // }
         // PGSQL_NUMオプションを指定すると、データをidで検索できる
         // PGSQL_ASSOCは列名
         // デフォルトだとidも列名も使えるように2通りで返してくれるので
