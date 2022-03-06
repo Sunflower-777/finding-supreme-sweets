@@ -66,8 +66,10 @@
     ?>
     <!-- 地図 -->
     <div id=resultsum></div>
-    <div id='map'></div>
-    <div id='info'></div>
+    <div class="mapAndInfoWrapper">
+      <div id='map'></div>
+      <div id='info'></div>
+    </div>
   </div>
   
   <!-- 地図の設定 -->
