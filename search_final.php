@@ -54,7 +54,7 @@
       }
       if (isset($item_name)){
         // DBに接続する
-        require('DBACCESS.php');
+        require('DBACCESS2.php');
         $connect = "host=" . $host . " dbname=" . $dbname . " user=" . $user . " password=" . $password;
         $dbconn = pg_connect($connect) or die('Could not connect: '.pg_last_error());
 
@@ -81,7 +81,7 @@
     });
 
     var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a><br /><a href="http://express.heartrails.com/">HeartRails Express</a>',
+    attribution: '&copy;<a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a><br /><a href="http://express.heartrails.com/">HeartRails Express</a>',
         });
     tileLayer.addTo(map);
     <?php
@@ -123,7 +123,7 @@
       while ($line = pg_fetch_array($result, null, PGSQL_NUM)){
         echo "var m" . $line[0] . "= L.marker([$line[4], $line[5]]).addTo(map);\n";
         echo "shopLocation.push([$line[4], $line[5]]);";
-        echo "m" . $line[0]	. ".bindPopup(\"<div class=\\\"popup\\\"><h1 class=\\\"pop-title\\\">" . $line[1] . "</h1><br /><img class=\\\"mini-img\\\" src=\\\"". $line[2] ."\\\"></div>\").openPopup();\n";
+        echo "m" . $line[0]	. ".bindPopup(\"<div class=\\\"popup\\\"><h1 class=\\\"pop-title\\\">" . $line[1] . "</h1><img class=\\\"mini-img\\\" src=\\\"". $line[2] ."\\\"></div>\").openPopup();\n";
         echo "c += 1 ;\n";
         echo "var info" . $line[0] . "= \"<i id=\\\"back\\\" class=\\\"bi bi-caret-left-fill\\\"></i><i id=\\\"next\\\" class=\\\"bi bi-caret-right-fill\\\"></i><h1 class=\\\"item-title\\\">" . $line[1] . "</h1><img class=\\\"info-img\\\" src=\\\"". $line[2] ."\\\"><h2 class=\\\"content-title\\\">comment</h2><p class=\\\"comment\\\">".$line[3]."</p><h2 class=\\\"content-title\\\">shop</h2><p class=\\\"shop-name\\\">".$line[6]."</p><a class=\\\"web\\\" href=\\\"".$line[7]."\\\">詳しくはwebで→</a>\";\n";
         echo "var i = info" . $line[0] . ";\n";
