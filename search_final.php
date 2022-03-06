@@ -42,7 +42,7 @@
     <form action="./search_final.php" method="post">
       <div class="input-group mb-3">
         <span class="input-group-text">商品名/駅名</span>
-        <input type="text" name="item_name" placeholder="キーワード">
+        <input type="text" name="item_name" placeholder="スイーツ名/〇〇駅">
         <input type="submit" class="btn btn-lg btn-info" value="調べる！" />
       </div>
     </form>
@@ -77,7 +77,7 @@
     // 地図中心の初期位置をここで設定
     var map = L.map('map', {
       center: [35.63124288, 139.7865704],
-      zoom: 10,
+      zoom: 15,
     });
 
     var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -97,7 +97,7 @@
         }
         
         echo "var station = L.marker([".$latlons[0][0].", ".$latlons[0][1]."], {icon: L.spriteIcon('red')}).addTo(map);\n";
-          echo "station.bindPopup('<h3>$stationNames[0]</h3>');\n";
+          echo "station.bindPopup('<h3>$stationNames[0]</h3>').openPopup();\n";
           $query = "SELECT nearshop.id, nearshop.sname, nearshop.photo, nearshop.comment, nearshop.lat, nearshop.lon, nearshop.pname, nearshop.HP, nearshop.distance 
           FROM 
           ( SELECT 
@@ -178,18 +178,6 @@
       document.getElementById("next").addEventListener('click', nextMenu);
     };
 
-
-    // <button class=\\\"btn btn-lg btn-info toinfo\\\">もっとみる</button> これ追加して頑張れば詳細を出したりしまったりできる
-    // var toInfos = document.getElementsByClassName('toinfo');
-    // for(i=0;i <= toInfos.length; i++){
-    //   toInfos[i].removeEventListener('click', function(e){
-    //     document.getElementById("info").classList.toggle("none");
-    //   });
-
-    //   toInfos[i].addEventListener('click', function(e){
-    //     document.getElementById("info").classList.toggle("none");
-    //   });
-    // };
   </script>
 
   <footer>
@@ -205,7 +193,6 @@
     var bodyHeight = document.getElementsByTagName('body')[0].offsetHeight;
     var footerElement = document.getElementsByTagName('footer');
     
-    console.log(footerElement[0].offsetHeight);
     footerElement[0].style.height = (bodyHeight - (navbarHeight + containerHeight))+'px';
     if (footerElement[0].offsetHeight <= 69){
       footerElement[0].style.height = 68 + 'px';
