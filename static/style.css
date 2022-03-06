@@ -113,8 +113,10 @@ input.input_keyword{
 
 #map{
   height: 50rem;
-  width: 65%;
   z-index: 0;
+}
+.searchMap{
+  width: 65%;
 }
 
 /* 吹き出しの設定 */
@@ -249,6 +251,9 @@ div.none *{
 }
 .error{
   border-left: 1.5rem solid red;
+}
+.insertMap{
+  width: 100%;
 }
 
 

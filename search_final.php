@@ -67,7 +67,7 @@
     <!-- 地図 -->
     <div id=resultsum></div>
     <div class="mapAndInfoWrapper">
-      <div id='map'></div>
+      <div id='map' class="searchMap"></div>
       <div id='info'></div>
     </div>
   </div>

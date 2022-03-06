@@ -186,7 +186,7 @@
     ?>
 
     <!-- <div id="map" style="height: 775px;"></div> -->
-    <div id="map"></div>
+    <div id="map" class="insertMap"></div>
     
   </div>
   
