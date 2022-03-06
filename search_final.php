@@ -41,7 +41,7 @@
   <div class="container search">
     <form action="./search_final.php" method="post">
       <div class="input-group mb-3">
-        <span class="input-group-text">商品名</span>
+        <span class="input-group-text">商品名/駅名</span>
         <input type="text" name="item_name" placeholder="キーワード">
         <input type="submit" class="btn btn-lg btn-info" value="調べる！" />
       </div>
@@ -83,9 +83,37 @@
         });
     tileLayer.addTo(map);
     <?php
-      $query = "SELECT sweets.id, sweets.name, sweets.photo, sweets.comment, sweets.lat, sweets.lon, shop.name, shop.HP FROM sweets, shop WHERE ((position($1 in sweets.name)>0 OR position($2 in sweets.category)>0) AND sweets.shop_id=shop.id);";
-      // 検索
-      $result = pg_query_params($dbconn, $query, array($item_name, $item_name)) or die('Could not connect: ' . pg_last_error());
+      if(mb_substr($item_name, -1, 1) == "駅"){
+        require('searchStation.php');
+        $stations = stationSearch(rtrim($item_name, "駅"));
+        //取り出した駅の情報を使いやすいように分割したい
+        $latlons = array();
+        $stationNames = array();
+        foreach($stations as $station){
+          $latlons[] = array($station->y, $station->x);
+          $stationNames[] = $station->name;
+        }
+        
+        echo "var station = L.marker([".$latlons[0][0].", ".$latlons[0][1]."], {icon: L.spriteIcon('red')}).addTo(map);\n";
+          echo "station.bindPopup('<h3>$stationNames[0]</h3>');\n";
+          $query = "SELECT nearshop.id, nearshop.sname, nearshop.photo, nearshop.comment, nearshop.lat, nearshop.lon, nearshop.pname, nearshop.HP, nearshop.distance 
+          FROM 
+          ( SELECT 
+            sweets.id AS id, sweets.name AS sname, sweets.photo AS photo, sweets.comment AS comment, sweets.lat AS lat, sweets.lon AS lon, shop.name AS pname, shop.HP AS HP,
+            ST_Distance(st_setSRID(st_makepoint($1, $2), 4326), st_setSRID(st_makepoint(lon, lat), 4326))*100 AS distance
+            FROM sweets JOIN shop ON sweets.shop_id=shop.id
+            ) AS nearshop
+          WHERE nearshop.distance < 1;";
+          // 検索
+        $result = pg_query_params($dbconn, $query, array($latlons[0][1], $latlons[0][0])) or die('Could not connect: ' . pg_last_error());
+        echo $result[0];
+
+      }else{
+        $query = "SELECT sweets.id, sweets.name, sweets.photo, sweets.comment, sweets.lat, sweets.lon, shop.name, shop.HP FROM sweets, shop WHERE ((position($1 in sweets.name)>0 OR position($2 in sweets.category)>0) AND sweets.shop_id=shop.id);";
+        // 検索
+        $result = pg_query_params($dbconn, $query, array($item_name, $item_name)) or die('Could not connect: ' . pg_last_error());
+      }
+
       echo "var c = 0;";
       echo "var datas = [];";
       echo "var shopLocation = [];";
@@ -102,12 +130,6 @@
         echo "Information.innerHTML = info" . $line[0] . ";\n";
       }
 
-      require_once('./searchStation.php');
-      for($i=0; $i < count($latlons); $i++){
-        echo "var station = L.marker([".$latlons[$i][0].", ".$latlons[$i][1]."], {icon: L.spriteIcon('red')}).addTo(map);\n";
-        // echo "var station = L.marker([".$latlons[$i][0].", ".$latlons[$i][1]."]).addTo(map);\n";
-        echo "station.bindPopup('<h3>$stationNames[$i]</h3>')\n";
-      }
     ?>
 
     var cursor = c - 1;

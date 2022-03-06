@@ -49,17 +49,4 @@
     curl_close($ch); //これ忘れるとメモリを占有したままになってしまう
     return $stations;
   }
-
-  $stations = stationSearch("国際展示場");
-
-   //取り出した駅の情報を使いやすいように分割したい
-  $latlons = array();
-  $stationNames = array();
-  foreach($stations as $station){
-    $latlons[] = array($station->y, $station->x);
-    $stationNames[] = $station->name;
-  }
-
-
-
 ?>
